@@ -1,7 +1,7 @@
 from imports import *
 
 # Set date for data retrieval
-DATE = datetime.datetime(2024, 10, 7)
+DATE = datetime.datetime(2024, 7, 2)
 
 # NASA Earthdata URL for access
 NASA_EARTHDATA_URL = "https://search.earthdata.nasa.gov/search"
@@ -15,8 +15,8 @@ OUTPUT_DIR = "./images/swaths"
 LOG_DIR = "./log"
 
 # Central coordinates for map zoom (latitude, longitude in degrees)
-CENTRAL_LAT = 22
-CENTRAL_LON = -92.0
+CENTRAL_LAT = 13.5
+CENTRAL_LON = -64.1
 # Size of the map extent (20 x 20 degrees for instance)
 MAP_EXTENT_DEGREES = 20.0
 
