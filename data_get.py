@@ -82,9 +82,15 @@ def fetch_cowvr_data(date, data_dir, earthdata_url, dataset_title):
         temporal=(start_time, end_time)
     )
 
-    if not results:
-        logging.error(f"No data found for {start_time} to {end_time}")
-        raise ValueError(f"No data found for {start_time}")
+    # Normalize results check and provide more informative logging
+    results_count = 0 if not results else len(results)
+    if results_count == 0:
+        logging.error(
+            f"No data found for {start_time} to {end_time} (short_name=COWVR_STPH8_L2_EDR_V10.0)."
+        )
+        raise ValueError(
+            f"No data found for {start_time} to {end_time} (short_name=COWVR_STPH8_L2_EDR_V10.0)"
+        )
 
     # Download the data with error handling
     logging.debug(
@@ -106,8 +112,12 @@ def fetch_cowvr_data(date, data_dir, earthdata_url, dataset_title):
             continue
 
     if not downloaded_files:
-        logging.error(f"No files downloaded for {start_time}")
-        raise ValueError(f"Failed to download any data for {start_time}")
+        logging.error(
+            f"No files downloaded for {start_time} to {end_time} after attempting {results_count} search results"
+        )
+        raise ValueError(
+            f"Failed to download any data for {start_time} to {end_time} (searched {results_count} granules)"
+        )
 
     logging.debug(
         f"Downloaded {len(downloaded_files)} files: {downloaded_files}")
